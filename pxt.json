@@ -1,5 +1,5 @@
 {
-    "name": "arcade-fancy-text",
+    "name": "arcade-fancy-text-simplified",
     "version": "0.0.14",
     "dependencies": {
         "device": "*"
