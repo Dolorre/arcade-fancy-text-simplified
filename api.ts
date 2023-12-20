@@ -309,7 +309,28 @@ namespace fancyText {
         return (sprite as TextSprite).remainingAnimationTime();
     }
 
-       /**
+    /**
+     * Sets a sound to be played every time a character is printed while
+     * a TextSprite is animating.
+     *
+     * @param sprite The TextSprite to set the sound on
+     * @param sound The sound to play when a character is printed
+     * @returns The remaining time in the animation or 0 if the TextSprite is not animating
+     */
+    //% blockId=fancy_text_set_animation_sound
+    //% block="$sprite set animation sound $sound"
+    //% sprite.shadow=variables_get
+    //% sprite.defl=myTextSprite
+    //% sound.shadow=soundExpression_createSoundEffect
+    //% group=Animate
+    //% weight=40
+    //% help=github:arcade-fancy-text/docs/set-animation-sound
+    export function setAnimationSound(sprite: Sprite, sound: music.Playable) {
+        assertTextSprite(sprite);
+        (sprite as TextSprite).setAnimationSound(sound);
+    }
+
+    /**
      * A Font that can be used with TextSprites
      */
     //% shim=TD_ID
