@@ -75,7 +75,6 @@ namespace fancyText {
             this.color = 1;
             this.maxWidth = 0;
             this.nextId = 0;
-            this.textFlags = Flag.ChangeHeightWhileAnimating | Flag.AlwaysOccupyMaxWidth;
             this.setText(text);
             this.startLine = 0;
 
@@ -116,10 +115,7 @@ namespace fancyText {
                 if (this.animation.update(deltaTimeMillis)) {
                     if (this.sound) {
                         this.sound.play(music.PlaybackMode.InBackground);
-                    }
-                    if (this.textFlags & (Flag.ChangeHeightWhileAnimating | Flag.ChangeWidthWhileAnimating)) {
-                        this.recalculateDimensions();
-                    }
+                    }                    
                 }
 
                 if (this.animation.isFinished()) {
@@ -238,15 +234,6 @@ namespace fancyText {
             this.recalculateLines();
         }
 
-        setTextFlag(flag: Flag, on: boolean) {
-            if (on) {
-                this.textFlags |= flag;
-            }
-            else {
-                this.textFlags &= ~flag;
-            }
-        }
-
         protected recalculateLines() {
             if (this.maxWidth) {
                 if (this.frame) {
@@ -279,51 +266,11 @@ namespace fancyText {
             let width = 0;
             let height = 0;
 
-            if (this.animation && (this.textFlags & (Flag.ChangeHeightWhileAnimating | Flag.ChangeWidthWhileAnimating))) {
-                let offset = 0;
-                for (const line of this.animation.lines) {
-                    let lineWidth = 0;
-                    for (const span of line.spans) {
-                        if (this.textFlags & Flag.ChangeWidthWhileAnimating) {
-                            const font = getFontForSpan(span.flags) || this.defaultFont || getDefaultFont(this.text);
-
-                            if (offset + span.length > this.animation.getOffset()) {
-                                lineWidth += getTextWidth(font, this.text, span.offset, span.offset + (this.animation.getOffset() - offset))
-                                offset += span.length;
-                                break;
-                            }
-                            else {
-                                lineWidth += getTextWidth(font, this.text, span.offset, span.offset + span.length);
-                                offset += span.length;
-                            }
-                        }
-                        else {
-                            offset += span.length;
-                            lineWidth = line.width;
-                        }
-                    }
-
-                    width = Math.max(lineWidth, width);
-                    height += line.height;
-
-                    if (offset > this.animation.getOffset()) break;
-                }
+            for (const line of this.visibleLines()) {
+                width = Math.max(line.width, width);
+                height += line.height;
             }
-            else {
-                for (const line of this.visibleLines()) {
-                    width = Math.max(line.width, width);
-                    height += line.height;
-                }
-            }
-
-            // If we are drawing pages, we need to fix the height for the last page
-            if (!(this.textFlags & Flag.ChangeHeightWhileAnimating) && this.drawnLines > 0) {
-                height = 0;
-                for (let i = 0; i < this.drawnLines; i++) {
-                    height += this.lines[Math.max(0, this.lines.length - this.drawnLines - 1 + i)].height
-                }
-            }
-
+         
             if (this.frame) {
                 const frameUnit = Math.idiv(this.frame.width, 3);
                 width += frameUnit << 1;
@@ -331,12 +278,6 @@ namespace fancyText {
                 width = Math.max(width, this.frame.width);
                 height = Math.max(height, this.frame.height);
             }
-
-
-            if (this.textFlags & Flag.AlwaysOccupyMaxWidth && this.maxWidth) {
-                width = this.maxWidth;
-            }
-
             this.setDimensions(width, height)
         }
 

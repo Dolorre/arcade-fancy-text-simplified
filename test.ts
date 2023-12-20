@@ -106,13 +106,10 @@ const lorem = "<wavy>Lorem ipsum dolor sit amet, consectetur adipiscing elit, se
 
 let myTextSprite: fancyText.TextSprite = null
 myTextSprite = fancyText.create(lorem)
-myTextSprite.setTextFlag(fancyText.Flag.ChangeHeightWhileAnimating, false)
-myTextSprite.setTextFlag(fancyText.Flag.AlwaysOccupyMaxWidth, true)
-myTextSprite.setTextFlag(fancyText.Flag.ChangeWidthWhileAnimating, false)
 
 myTextSprite.setMaxLines(3)
 
-fancyText.setFont(myTextSprite, fancyText.italic_small)
+fancyText.setFont(myTextSprite, fancyText.defaultArcade)
 // fancyText.setFrame(myTextSprite, img`
 //     ..bbbbbbbbbbbbbbbbbbbb..
 //     .b11bb11bb11bb11bb11bbb.

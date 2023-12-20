@@ -25,21 +25,6 @@ namespace fancyText {
         VeryFast = 20
     }
 
-    //% blockIdentity="fancyText.__textFlagPicker"
-    export enum Flag {
-        //% block="change height while animating"
-        //% blockIdentity="fancyText.__textFlagPicker"
-        ChangeHeightWhileAnimating = 1 << 0,
-
-        //% block="change width while animating"
-        //% blockIdentity="fancyText.__textFlagPicker"
-        ChangeWidthWhileAnimating = 1 << 1,
-
-        //% block="always occupy max width"
-        //% blockIdentity="fancyText.__textFlagPicker"
-        AlwaysOccupyMaxWidth = 1 << 2
-    }
-
     export enum AnimationPlayMode {
         //% block="until done"
         UntilDone,
@@ -238,11 +223,6 @@ namespace fancyText {
     //% group=Create
     //% weight=10
     //% blockGap=8
-    //% help=github:arcade-fancy-text/docs/set-text-flag
-    export function setTextFlag(sprite: Sprite, flag: number, on: boolean) {
-        assertTextSprite(sprite);
-        (sprite as TextSprite).setTextFlag(flag, on);
-    }
 
     /**
      * Animates a TextSprite so that it prints itself character by character
@@ -376,32 +356,12 @@ namespace fancyText {
     export function __speedPicker(speed: TextSpeed): number {
         return speed;
     }
-
-    /**
-     * A Flag that can be set to on or off for a TextSprite. Flags let you customize
-     * the way a TextSprite behaves.
-     */
-    //% shim=TD_ID
-    //% blockId=fancy_text__textFlagPicker
-    //% block="$flag"
-    //% group=Create
-    //% weight=0
-    //% help=github:arcade-fancy-text/docs/flag
-    export function __textFlagPicker(flag: Flag): number {
-        return flag;
-    }
-
+   
     //% whenUsed
     //% block="default arcade"
     //% blockIdentity="fancyText.__fontPicker"
     //% fixedInstance
     export const defaultArcade: fancyText.BaseFont = new LegacyFont(image.font8);
-
-    //% whenUsed
-    //% block="unicode arcade"
-    //% blockIdentity="fancyText.__fontPicker"
-    //% fixedInstance
-    export const unicodeArcade: fancyText.BaseFont = new LegacyFont(image.font12);
 
     //% whenUsed
     //% block="small arcade"
