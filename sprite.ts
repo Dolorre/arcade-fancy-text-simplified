@@ -67,6 +67,8 @@ namespace fancyText {
         protected drawnLines: number;
         protected animation: AnimationState;
 
+        protected sound: music.Playable;
+
         constructor(public text: string, kind: number) {
             super(img`1`, kind);
 
@@ -110,7 +112,13 @@ namespace fancyText {
 
         preUpdate(deltaTimeMillis: number) {
             if (this.animation) {
-                 if (this.animation.isFinished()) {
+                if (this.animation.update(deltaTimeMillis)) {
+                    if (this.sound) {
+                        this.sound.play(music.PlaybackMode.InBackground);
+                    }                    
+                }
+
+                if (this.animation.isFinished()) {
                     this.animation = undefined;
                 }
             }
@@ -204,6 +212,10 @@ namespace fancyText {
 
         cancelAnimation() {
             this.animation = undefined;
+        }
+
+        setAnimationSound(sound: music.Playable) {
+            this.sound = sound;
         }
 
         setFrame(frame: Image) {
@@ -353,6 +365,12 @@ namespace fancyText {
 
             if (!span) return timer;
 
+            if (span.flags & Tag.VerySlow) {
+                timer *= 12;
+            }
+            else if (span.flags & Tag.Slow) {
+                timer *= 4;
+            }
             else if (span.flags & Tag.Fast) {
                 timer /= 2;
             }
@@ -393,7 +411,13 @@ namespace fancyText {
         let length = 0;
         for (const line of lines.slice(startLine, endLine)) {
             for (const span of line.spans) {
-                if (span.flags & Tag.Fast) {
+                if (span.flags & Tag.VerySlow) {
+                    length += 12 * span.length;
+                }
+                else if (span.flags & Tag.Slow) {
+                    length += 4 * span.length;
+                }
+                else if (span.flags & Tag.Fast) {
                     length += 0.5 * span.length;
                 }
                 else if (span.flags & Tag.VeryFast) {
