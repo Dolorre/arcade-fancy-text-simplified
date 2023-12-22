@@ -265,6 +265,12 @@ namespace fancyText {
     //% fixedInstance
     export const defaultArcade: fancyText.BaseFont = new LegacyFont(image.font8);
 
+    //% whenUsed
+    //% block="small arcade"
+    //% blockIdentity="fancyText.__fontPicker"
+    //% fixedInstance
+    export const smallArcade: fancyText.BaseFont = new LegacyFont(image.font5);
+
     function assertTextSprite(sprite: Sprite) {
         if (!(sprite instanceof TextSprite)) {
             throw "Using TextSprite functions on a non TextSprite Sprite is not supported.";
