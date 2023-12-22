@@ -36,7 +36,43 @@ namespace fancyText {
     }
 
     function drawFontSpan(left: number, top: number, text: string, font: fancyText.BaseFont, color: number, flags: number, absoluteLeft: number, length: number) {
-        if (length < text.length) {
+        if (flags & Tag.Blinking) {
+            if (Math.idiv(game.runtime(), 250) % 2 === 0) {
+                return;
+            }
+        }
+        if (flags & (Tag.Wavy | Tag.Shaky | Tag.Rainbow)) {
+            const width = getTextWidth(font, text) / text.length;
+
+            const tick = Math.idiv(game.runtime(), 100);
+            let x = left;
+
+            for (let i = 0; i < text.length; i++) {
+                if (i >= length) return;
+
+                let y = top;
+                if (flags & Tag.Shaky) {
+                    x += randint(-1, 1);
+                    y += randint(-1, 1);
+                }
+                if (flags & Tag.Wavy) {
+                    y += Math.sin(((x - absoluteLeft) / 10) + tick) * 2;
+                }
+
+                const char = text.charAt(i);
+                const code = text.charCodeAt(i);
+
+                printText(screen, font, char, x, y, color);
+
+                if (char == " " || !font.isInFont(code)) {
+                    x += font.wordSpacing;
+                }
+                else {
+                    x += font.charWidth(code) + font.letterSpacing;
+                }
+            }
+        }
+        else if (length < text.length) {
             printText(screen, font, text.substr(0, length), left, top, color);
         }
         else {
@@ -318,7 +354,43 @@ namespace fancyText {
     }
 
     function drawFontSpanInBox(left: number, top: number, boxLeft: number, boxTop: number, boxRight: number, boxBottom: number, text: string, font: fancyText.BaseFont, color: number, flags: number, absoluteLeft: number, length: number) {
-        if (length < text.length) {
+        if (flags & Tag.Blinking) {
+            if (Math.idiv(game.runtime(), 250) % 2 === 0) {
+                return;
+            }
+        }
+        if (flags & (Tag.Wavy | Tag.Shaky | Tag.Rainbow)) {
+            const width = getTextWidth(font, text) / text.length;
+
+            const tick = Math.idiv(game.runtime(), 100);
+            let x = left;
+
+            for (let i = 0; i < text.length; i++) {
+                if (i >= length) return;
+
+                let y = top;
+                if (flags & Tag.Shaky) {
+                    x += randint(-1, 1);
+                    y += randint(-1, 1);
+                }
+                if (flags & Tag.Wavy) {
+                    y += Math.sin(((x - absoluteLeft) / 10) + tick) * 2;
+                }
+
+                const char = text.charAt(i);
+                const code = text.charCodeAt(i);
+
+                printTextInBox(screen, font, char, x, y, boxLeft, boxTop, boxRight, boxBottom, color);
+
+                if (char == " " || !font.isInFont(code)) {
+                    x += font.wordSpacing;
+                }
+                else {
+                    x += font.charWidth(code) + font.letterSpacing;
+                }
+            }
+        }
+        else if (length < text.length) {
             printTextInBox(screen, font, text.substr(0, length), left, top, boxLeft, boxTop, boxRight, boxBottom, color);
         }
         else {
