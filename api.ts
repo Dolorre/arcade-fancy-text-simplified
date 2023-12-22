@@ -2,6 +2,9 @@
 //% color="#bf42f5"
 //$ icon="\uf031"
 namespace fancyText {
+
+    export const defaultArcade: fancyText.BaseFont = new LegacyFont(image.font8);
+
     //% blockIdentity="fancyText.__speedPicker"
     export enum TextSpeed {
         //% block="very slow"
@@ -233,19 +236,6 @@ namespace fancyText {
     }
 
     /**
-     * A Font that can be used with TextSprites
-     */
-    //% shim=TD_ID
-    //% blockId=fancy_text__fontPicker
-    //% block="$font"
-    //% group=Create
-    //% weight=5
-    //% help=github:arcade-fancy-text/docs/font
-    export function __fontPicker(font: BaseFont): BaseFont {
-        return font;
-    }
-
-    /**
      * A TextSpeed that can control how fast a TextSprite is animated. This returns
      * a speed in characters per second.
      */
@@ -258,19 +248,7 @@ namespace fancyText {
     export function __speedPicker(speed: TextSpeed): number {
         return speed;
     }
-   
-    //% whenUsed
-    //% block="default arcade"
-    //% blockIdentity="fancyText.__fontPicker"
-    //% fixedInstance
-    export const defaultArcade: fancyText.BaseFont = new LegacyFont(image.font8);
-
-    //% whenUsed
-    //% block="small arcade"
-    //% blockIdentity="fancyText.__fontPicker"
-    //% fixedInstance
-    export const smallArcade: fancyText.BaseFont = new LegacyFont(image.font5);
-
+ 
     function assertTextSprite(sprite: Sprite) {
         if (!(sprite instanceof TextSprite)) {
             throw "Using TextSprite functions on a non TextSprite Sprite is not supported.";
