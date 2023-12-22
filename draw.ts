@@ -1,5 +1,4 @@
 namespace fancyText {
-    const rainbow = img`245768ca`
 
     export function drawFontText(left: number, top: number, text: string, lines: Line[], defaultColor: number, defaultFont: fancyText.BaseFont, length: number) {
         let currentLeft = left;
@@ -7,8 +6,8 @@ namespace fancyText {
         for (const line of lines) {
             currentLeft = left;
             for (const span of line.spans) {
-                const font = getFontForSpan(span.flags) || defaultFont;
-                const color = getColorForSpan(span.flags) || defaultColor;
+                const font = defaultFont;
+                const color = defaultColor;
 
                 if (font.lineHeight === line.height) {
                     drawFontSpan(currentLeft, top, text.substr(span.offset, span.length), font, color, span.flags, left, length);
@@ -298,8 +297,8 @@ namespace fancyText {
         for (const line of lines) {
             currentLeft = left;
             for (const span of line.spans) {
-                const font = getFontForSpan(span.flags) || defaultFont;
-                const color = getColorForSpan(span.flags) || defaultColor;
+                const font = defaultFont;
+                const color = defaultColor;
 
                 if (font.lineHeight === line.height) {
                     drawFontSpanInBox(currentLeft, top, boxLeft, boxTop, boxRight, boxBottom, text.substr(span.offset, span.length), font, color, span.flags, left, length);
