@@ -233,6 +233,19 @@ namespace fancyText {
     }
 
     /**
+     * A Font that can be used with TextSprites
+     */
+    //% shim=TD_ID
+    //% blockId=fancy_text__fontPicker
+    //% block="$font"
+    //% group=Create
+    //% weight=5
+    //% help=github:arcade-fancy-text/docs/font
+    export function __fontPicker(font: BaseFont): BaseFont {
+        return font;
+    }
+
+    /**
      * A TextSpeed that can control how fast a TextSprite is animated. This returns
      * a speed in characters per second.
      */
