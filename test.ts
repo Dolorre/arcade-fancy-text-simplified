@@ -6,8 +6,6 @@ myTextSprite = fancyText.create(lorem)
 
 myTextSprite.setMaxLines(3)
 
-fancyText.setFont(myTextSprite, fancyText.defaultArcade)
-
 controller.moveSprite(myTextSprite)
 
 fancyText.setMaxWidth(myTextSprite, 160)

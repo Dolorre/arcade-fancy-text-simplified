@@ -125,29 +125,7 @@ namespace fancyText {
         (sprite as TextSprite).setMaxWidth(maxWidth);
     }
 
-    /**
-     * Sets the font used when drawing this TextSprite. Not all fonts
-     * can be used with all characters, so try using the "arcade default"
-     * or "arcade unicode" font if your text is displaying incorrectly
-     *
-     * @param sprite The TextSprite to set the font on
-     * @param font The font to set on the TextSprite
-     */
-    //% blockId=fancy_text_set_font
-    //% block="$sprite set font $font"
-    //% sprite.shadow=variables_get
-    //% sprite.defl=myTextSprite
-    //% font.shadow=fancy_text__fontPicker
-    //% group=Create
-    //% weight=60
-    //% blockGap=8
-    //% help=github:arcade-fancy-text/docs/set-font
-    export function setFont(sprite: Sprite, font: BaseFont) {
-        assertTextSprite(sprite);
-        (sprite as TextSprite).setFont(font);
-    }
-
-    /**
+       /**
      * Animates a TextSprite so that it prints itself character by character
      * at a given speed. The speed is in characters per second.
      *
@@ -264,12 +242,6 @@ namespace fancyText {
     //% blockIdentity="fancyText.__fontPicker"
     //% fixedInstance
     export const defaultArcade: fancyText.BaseFont = new LegacyFont(image.font8);
-
-    //% whenUsed
-    //% block="small arcade"
-    //% blockIdentity="fancyText.__fontPicker"
-    //% fixedInstance
-    export const smallArcade: fancyText.BaseFont = new LegacyFont(image.font5);
 
     function assertTextSprite(sprite: Sprite) {
         if (!(sprite instanceof TextSprite)) {
