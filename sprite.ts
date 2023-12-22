@@ -67,8 +67,6 @@ namespace fancyText {
         protected drawnLines: number;
         protected animation: AnimationState;
 
-        protected sound: music.Playable;
-
         constructor(public text: string, kind: number) {
             super(img`1`, kind);
 
@@ -112,13 +110,7 @@ namespace fancyText {
 
         preUpdate(deltaTimeMillis: number) {
             if (this.animation) {
-                if (this.animation.update(deltaTimeMillis)) {
-                    if (this.sound) {
-                        this.sound.play(music.PlaybackMode.InBackground);
-                    }                    
-                }
-
-                if (this.animation.isFinished()) {
+                 if (this.animation.isFinished()) {
                     this.animation = undefined;
                 }
             }
@@ -212,10 +204,6 @@ namespace fancyText {
 
         cancelAnimation() {
             this.animation = undefined;
-        }
-
-        setAnimationSound(sound: music.Playable) {
-            this.sound = sound;
         }
 
         setFrame(frame: Image) {

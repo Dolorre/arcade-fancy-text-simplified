@@ -19,7 +19,8 @@
         "draw.ts",
         "sprite.ts",
         "api.ts",
-        "main.ts"
+        "main.ts",
+        "main.py"
     ],
     "testFiles": [
         "test.ts"
