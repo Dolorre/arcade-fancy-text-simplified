@@ -2,10 +2,8 @@ namespace fancyText {
     export enum Tag {
         Color01 = 1 << 0,
         Font8 = 1 << 1,
-        VerySlow = 1 << 2,
-        Slow = 1 << 3,
-        Fast = 1 << 4,
-        VeryFast = 1 << 5
+        Fast = 1 << 2,
+        VeryFast = 1 << 3
     }
 
     export class Span {
@@ -152,10 +150,6 @@ namespace fancyText {
             case "medium":
             case "font8":
                 return Tag.Font8;
-            case "veryslow":
-                return Tag.VerySlow;
-            case "slow":
-                return Tag.Slow;
             case "fast":
                 return Tag.Fast;
             case "veryfast":
@@ -166,7 +160,7 @@ namespace fancyText {
     }
 
     export function getFontForSpan(flags: number) {
-            return new fancyText.LegacyFont(image.font8);
+        return new fancyText.LegacyFont(image.font8);
                     
         return undefined;
     }

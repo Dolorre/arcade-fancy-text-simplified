@@ -4,18 +4,6 @@
 namespace fancyText {
     //% blockIdentity="fancyText.__speedPicker"
     export enum TextSpeed {
-        //% block="very slow"
-        //% blockIdentity="fancyText.__speedPicker"
-        VerySlow = 4,
-
-        //% block="slow"
-        //% blockIdentity="fancyText.__speedPicker"
-        Slow = 8,
-
-        //% block="normal"
-        //% blockIdentity="fancyText.__speedPicker"
-        Normal = 12,
-
         //% block="fast"
         //% blockIdentity="fancyText.__speedPicker"
         Fast = 16,
@@ -208,19 +196,6 @@ namespace fancyText {
     export function remainingAnimationTime(sprite: Sprite) {
         assertTextSprite(sprite);
         return (sprite as TextSprite).remainingAnimationTime();
-    }
-
-    /**
-     * A Font that can be used with TextSprites
-     */
-    //% shim=TD_ID
-    //% blockId=fancy_text__fontPicker
-    //% block="$font"
-    //% group=Create
-    //% weight=5
-    //% help=github:arcade-fancy-text/docs/font
-    export function __fontPicker(font: BaseFont): BaseFont {
-        return font;
     }
 
     /**
