@@ -126,44 +126,6 @@ namespace fancyText {
     }
 
     /**
-     * Sets the color of the text drawn by this TextSprite.
-     *
-     * @param sprite The TextSprite to set the color of
-     * @param color The color to use when drawing this TextSprite
-     */
-    //% blockId=fancy_text_set_color
-    //% block="$sprite set color $color"
-    //% sprite.shadow=variables_get
-    //% sprite.defl=myTextSprite
-    //% color.shadow=colorindexpicker
-    //% group=Create
-    //% weight=70
-    //% blockGap=8
-    //% help=github:arcade-fancy-text/docs/set-color
-    export function setColor(sprite: Sprite, color: number) {
-        assertTextSprite(sprite);
-        (sprite as TextSprite).setColor(color);
-    }
-
-    /**
-     * Gets the color of this TextSprite.
-     *
-     * @param sprite The TextSprite to get the color of
-     * @returns The color of this TextSprite
-     */
-    //% blockId=fancy_text_get_color
-    //% block="$sprite color"
-    //% sprite.shadow=variables_get
-    //% sprite.defl=myTextSprite
-    //% group=Create
-    //% weight=65
-    //% help=github:arcade-fancy-text/docs/get-color
-    export function getColor(sprite: Sprite) {
-        assertTextSprite(sprite);
-        return (sprite as TextSprite).getColor();
-    }
-
-    /**
      * Sets the font used when drawing this TextSprite. Not all fonts
      * can be used with all characters, so try using the "arcade default"
      * or "arcade unicode" font if your text is displaying incorrectly
@@ -184,45 +146,6 @@ namespace fancyText {
         assertTextSprite(sprite);
         (sprite as TextSprite).setFont(font);
     }
-
-
-    /**
-     * Sets a frame to be drawn around this TextSprite
-     *
-     * @param sprite The TextSprite to set the frame on
-     * @param frame The frame to set on the TextSprite
-     */
-    //% blockId=fancy_text_set_frame
-    //% block="$sprite set frame $frame"
-    //% sprite.shadow=variables_get
-    //% sprite.defl=myTextSprite
-    //% frame.shadow=dialog_image_picker
-    //% group=Create
-    //% weight=50
-    //% blockGap=8
-    //% help=github:arcade-fancy-text/docs/set-frame
-    export function setFrame(sprite: Sprite, frame: Image) {
-        assertTextSprite(sprite);
-        (sprite as TextSprite).setFrame(frame);
-    }
-
-    /**
-     * Sets a flag on a TextSprite. Flags are used to customize
-     * various settings for a TextSprite
-     *
-     * @param sprite The TextSprite to set the flag on
-     * @param flag The flag to set the value of
-     * @param on The value to set the flag to
-     */
-    //% blockId=fancy_text_set_text_flag
-    //% block="$sprite set flag $flag to $on"
-    //% sprite.shadow=variables_get
-    //% sprite.defl=myTextSprite
-    //% flag.shadow=fancy_text__textFlagPicker
-    //% on.shadow=toggleOnOff
-    //% group=Create
-    //% weight=10
-    //% blockGap=8
 
     /**
      * Animates a TextSprite so that it prints itself character by character
